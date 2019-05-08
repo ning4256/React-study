@@ -132,3 +132,5 @@ export default App;
 ```
 
 当我们这两个文件都编写完成后，可以在终端使用npm start(如果安装了yarn，也可以使用yarn start)命令，来看一下我们编写的结果了。
+
+![hello Word](https://github.com/ning4256/React-study/blob/master/images/img1.png)
