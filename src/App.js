@@ -4,10 +4,15 @@ import React, {Component} from 'react'
 class App extends Component {
   render() {
     return (
-      <div>
-        Hello World!
-      </div>
+      <ul className='my-ul'>
+        <li>{false? 'first li': 'no first li'}</li>
+        <li>second li</li>
+      </ul>
     )
+    // var child1 = React.createElement('li', null, 'xiaofan');
+    // var child2 = React.createElement('li', null, 'ning');
+    // var root = React.createElement('ul', {className: 'my-ul'}, child1, child2);
+
   }
 }
 //将App这个组件暴露出去

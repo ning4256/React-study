@@ -134,3 +134,39 @@ export default App;
 当我们这两个文件都编写完成后，可以在终端使用npm start(如果安装了yarn，也可以使用yarn start)命令，来看一下我们编写的结果了。
 
 ![hello Word](https://github.com/ning4256/React-study/blob/master/images/img1.png)
+
+### 初识JSX语法
+
+JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方便的利用HTML语法来创建虚拟DOM，当遇到<，JSX就当作HTML解析，遇到{就当JavaScript解析。
+
+例如：
+
+```JSX
+      <ul className='my-ul'>
+        <li>first li</li>
+        <li>second li</li>
+      </ul>
+  ```
+
+以前会这么写
+
+```javascript
+  var child1 = React.createElement('li', null, 'xiaofan');
+  var child2 = React.createElement('li', null, 'ning');
+  var root = React.createElement('ul', {className: 'my-ul'}, child1, child2);
+```
+
+#### 组件和普通JSX语法区别
+
+这个说起来也只有简单的一句话，就是你自定义的组件必须首字母要进行大写，而JSX是小写字母开头的。
+
+#### JSX中使用三元运算符
+
+在JSX中也是可以使用js语法的，我们先简单使用一下。
+
+```javascript
+  <ul className='my-ul'>
+    <li>{false? 'first li': 'no first li'}</li>
+    <li>second li</li>
+  </ul>
+```
