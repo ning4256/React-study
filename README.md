@@ -170,3 +170,63 @@ JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方�
     <li>second li</li>
   </ul>
 ```
+
+### React的一个小组件
+
+在SRC的目录下面，新建一个文件Xiaojiejie.js文件，然后写一个基本的HTML结构。
+
+```javascript
+import React,{Component} from 'react'
+
+class Xiaojiejie extends Component{
+    render(){
+        return  (
+            <div>
+               <div><input /> <button> 增加服务 </button></div>
+               <ul>
+                   <li>头部按摩</li>
+                   <li>精油推背</li>
+               </ul> 
+            </div>
+        )
+    }
+}
+export default Xiaojiejie;
+```
+
+#### 组件外层包裹原则
+
+这是一个很重要的原则，比如上面的代码，我们去掉最外层的<Div>，就回报错，因为React要求必须在一个组件的最外层进行包裹。
+
+#### Fragment标签讲解
+
+加上最外层的DIV，组件就是完全正常的，但是你的布局就偏不需要这个最外层的标签怎么办?比如我们在作Flex布局的时候,外层还真的不能有包裹元素。这种矛盾其实React16已经有所考虑了，为我们准备了`<Fragment>`标签。
+
+要想使用`<Fragment>`，需要先进行引入
+
+```javascript
+import React,{Component,Fragment } from 'react'
+```
+
+然后把最外层的`<div>`标签，换成<Fragment>标签，代码如下。
+
+```javascript
+import React,{Component,Fragment } from 'react'
+
+class Xiaojiejie extends Component{
+    render(){
+        return  (
+            <Fragment>
+               <div><input /> <button> 增加服务 </button></div>
+               <ul>
+                   <li>头部按摩</li>
+                   <li>精油推背</li>
+               </ul> 
+            </Fragment>
+        )
+    }
+}
+export default Xiaojiejie 
+```
+
+这时候你再去浏览器的Elements中查看，就回发现已经没有外层的包裹了。
