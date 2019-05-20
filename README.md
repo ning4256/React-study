@@ -230,3 +230,84 @@ export default Xiaojiejie
 ```
 
 这时候你再去浏览器的Elements中查看，就回发现已经没有外层的包裹了。
+
+### React学习理论
+
+#### 响应式设计和数据的绑定
+
+`React`不建议你直接操作DOM元素,而是要通过数据进行驱动，改变界面中的效果。`React`会根据数据的变化，自动的帮助你完成界面的改变。所以在写`React`代码时，你无需关注`DOM`相关的操作，只需要关注数据的操作就可以了（这也是`React`如此受欢迎的主要原因，大大加快了我们的开发速度）。
+
+**通常情况下，我们可以写一个构造函数，里面给一些默认的值和参数**
+
+```javaScript
+constructor(props) {
+  super(pros) //调用父函数的构造函数
+  this.state = {
+    inputValue: '',
+    list: []
+  }
+}
+```
+
+在`React`中的数据绑定和`Vue`中几乎一样，也是采用字面量(我自己起的名字)的形式，就是使用{}来标注，其实这也算是`js`代码的一种声明。比如现在我们要把`inputValue`值绑定到`input`框中，只要写入下面的代码就可以了。其实说白了就是在JSX中使用js代码。
+
+```html
+<input value={this.state.inputValue}/>
+```
+
+#### 绑定事件
+
+这时候你到界面的文本框中去输入值，是没有任何变化的，这是因为我们强制绑定了`inputValue`的值。如果要想改变，需要绑定响应事件，改变`inputValue`的值。比如绑定一个改变事件，这个事件执行`inputChange()`(当然这个方法还没有)方法。
+
+```html
+<input value={this.state.inputValue} onChange={this.inputChange} />
+```
+
+现在还没有inputChange()这个方法，在render()方法的下面建立一个inputChange()方法，代码如下：
+
+```javaScript
+ inputChange(e){
+        console.log(e);
+    }
+```
+
+这时候会发现响应事件可以使用了，但是如何获得我们输入的值那，程序中输入下面的代码。
+
+```javaScript
+inputChange(e){
+    console.log(e.target.value);
+}
+```
+这时候控制台是可以打印出输入的值的，视频中会有演示。看到获得了输入的值，想当然的认为直接改变inputValue的值就可以了(错的).
+
+```javaScript
+inputChange(e){
+    console.log(e.target.value);
+    this.state.inputValue=e.target.value;
+}
+```
+
+写完后再进行预览，会发现程序直接报错了（加项服务还真的有点难度哦,大宝剑不好作的...........）。
+
+其实我们范了两个错误：
+
+- 一个是this指向不对，你需要重新用bind设置一下指向(ES6的语法)。
+- 另一个是React中改变值需要使用this.setState方法。
+第一个错误很好解决，直接再JSX部分，利用bind进行绑定就好。
+
+```javaScript
+ <input value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
+```
+这步做完，我们还需要加入setState方法，改变值。代码如下:
+
+```javaScript
+inputChange(e){
+    // console.log(e.target.value);
+    // this.state.inputValue=e.target.value;
+    this.setState({
+        inputValue:e.target.value
+    })
+}
+```
+
+现在测试一下，输入框可以改变值了，其实这节课很重要，里边设计了React的重要思想，建议这节课可以反复多看两遍，虽然不难，但是这是一个最基本的思想的转变。下节课可要真的增加服务项目了。
